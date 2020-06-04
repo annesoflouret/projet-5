@@ -1,9 +1,24 @@
 body {
     background-color: #F6ECFD;
+    width: auto;
+    height: auto;
 }
 
-header{
-    text-align: center;
-    margin-top: 3em;
+
+
+.header
+{
+    text-decoration: none;
+    color: black;
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2em;
 }
 
+.basket
+{
+    margin: 1em;
+    text-decoration: none;
+    color: black;
+}
