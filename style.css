@@ -13,13 +13,46 @@ body {
     text-align: right;
     display: flex;
     justify-content: space-between;
-    margin-top: 2em;
+    background-color: #D1C4E9;
 }
 
-.basket
+.nav-link
 {
-    margin: 1em;
-    text-decoration: none;
     color: black;
 }
+
+#space-h
+{
+    margin: 1em;
+}
+
+#footer
+{
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+    background-color: #B39DDB;
+    padding: 1em;
+}
+
+.footer-link
+{
+    text-decoration: none;
+    color: black; 
+}
+
+#camera
+{
+    margin: 2em;
+}
+
+.product-border
+{
+    border: 1px solid black;
+    box-shadow: 10px 5px 5px grey;
+    background-color:#D1C4E9;
+}
+
+
+
 

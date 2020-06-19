@@ -11,8 +11,8 @@
 </head>
 <body>
     <header>
-        <nav class="header d-flex navbar navbar-expand-lg navbar-light">
-            <a class="mr-auto" href="index.html"><img src="logoOrinoco.png"></a>
+        <nav class="header d-flex navbar navbar-expand-lg">
+            <a class="mr-auto" href="index.html"><img src="images/logoOrinoco.png"></a>
             
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -21,10 +21,7 @@
             <div class="justify-content-end collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                    <a class="nav-link" href="produit.html">Produit <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="commande.html">Commande</a>
+                        <a class="nav-link" href="commande.html">Commande</a>
                     </li>
                     <li class="nav-item">
                     <a class="nav-link" href="panier.html">Panier</a>
@@ -42,20 +39,21 @@
             </div>
         </section>
         <section>
-            <h2>
-                Selection des caméras
+            <h2 class="text-center" id="space-h">
+                Selectionnez votre futur appareil photo!
             </h2>
             <div class="container">
-                <div class="row"> 
+                <div class="row justify-content-around"> 
                 </div>
             </div>
         </section>
     </main>
-    <footer>
-        <a href="mailto:contact@orinoco.com">Contactez-nous.</a>
+    <footer id="footer">
+        <a class="footer-link" href=index.html>Mentions Légales.</a>
+        <a class="footer-link" href="mailto:contact@orinoco.com">Contactez-nous.</a>
     </footer>
     
-    <script type="text/javascript" src="ajax.js"></script>
-    <script type="text/javascript" src="orinoco.js"></script>
+    <script type="text/javascript" src="js/ajax.js"></script>
+    <script type="text/javascript" src="js/orinoco.js"></script>
 </body>
 </html>
