@@ -1,10 +1,10 @@
-body {
+/*index*/
+body 
+{
     background-color: #F6ECFD;
     width: auto;
     height: auto;
 }
-
-
 
 .header
 {
@@ -46,13 +46,17 @@ body {
     margin: 2em;
 }
 
-.product-border
+.product-border /*produit, panier*/
 {
     border: 1px solid black;
     box-shadow: 10px 5px 5px grey;
     background-color:#D1C4E9;
 }
+/*produit*/
 
 
+/*panier*/
 
+
+/*commande*/
 

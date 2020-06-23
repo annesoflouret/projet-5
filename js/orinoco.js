@@ -6,8 +6,8 @@ get("http://localhost:3000/api/cameras", function(response){
     localStorage.setItem("test", "bonjour");
     const test = localStorage.getItem("test");
     console.log(test);
-    let background = document.createElement('figure');
 
+    //création des cardes de présentation des appareils photos
     for (let i = 0; i < response.length; i = i + 1)
     {   
         let div = document.createElement("div");
@@ -30,16 +30,15 @@ get("http://localhost:3000/api/cameras", function(response){
         let link = document.createElement("a");
         link.setAttribute("href", "produit.html?id=" + response[i]._id);
 
-
         section[1].appendChild(div);
         div.appendChild(link);
         link.appendChild(img);
         div.appendChild(legend);
         div.appendChild(lenses);
         div.appendChild(price);
-        
     }
-
+    
+    // espace vide pour organiser les éléments
     if (response.length % 2 == 1) {
         let div = document.createElement("div");
         div.setAttribute("class", "col-md-5 mt-5 mb-4");
