@@ -38,6 +38,7 @@ console.log(response);
         optionDefault.innerHTML = "Please choose an option";
         lenses.appendChild(optionDefault);
 
+        //alerte ajout panier
         let btn = document.createElement("button"); 
         btn.innerHTML = "Ajouter au panier";
 
@@ -46,8 +47,10 @@ console.log(response);
         btn.addEventListener('click', function() { 
         let lenses = document.getElementsByTagName("select");         
         let lenseSelected = lenses[0].value;
+        alert("ajouté au panier");
         console.log(lenseSelected);
         console.log(id);
+
 
         let basketContent = JSON.parse(localStorage.getItem("basketContent"));
         if (basketContent == undefined) {
