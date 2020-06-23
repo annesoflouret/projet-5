@@ -38,7 +38,8 @@ get("http://localhost:3000/api/cameras", function(response){
         div.appendChild(price);
     }
     
-    // espace vide pour organiser les éléments
+    //ajoute une div quand le nombre d'élément est impair
+    //modulo 2 = le reste de la division par 2, exemple 3/2 = 1 reste 1
     if (response.length % 2 == 1) {
         let div = document.createElement("div");
         div.setAttribute("class", "col-md-5 mt-5 mb-4");

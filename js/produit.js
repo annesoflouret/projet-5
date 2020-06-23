@@ -32,7 +32,7 @@ console.log(response);
         
         // Choix des lentilles
         let lenses = document.createElement("select");
-        //lenses.setAttribute("class", "d-flex justify-content-center");
+        
     
         let optionDefault = document.createElement("option");
         optionDefault.innerHTML = "Please choose an option";
