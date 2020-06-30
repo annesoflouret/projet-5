@@ -18,9 +18,9 @@ function post(jsonBody){
         if (this.readyState == 4 && this.status == 201) {
             let response = JSON.parse(this.responseText);
             console.log(response);
-            localStorage.setItem("basketContent", JSON.stringify([]));
+            localStorage.setItem("basketContent", JSON.stringify([])); 
             localStorage.setItem("orderConfirmation", response.orderId);
-            window.location.href = "confirmation.html"; // on va de tout facon à la page de confirmation
+            window.location.href = "confirmation.html"; // on va à la page de confirmation
         }
     }
     request.send(JSON.stringify(jsonBody));
