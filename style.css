@@ -44,6 +44,12 @@ body
 #camera
 {
     margin: 2em;
+    font-size: 30px;
+}
+
+#space-h
+{
+    font-size: 25px;
 }
 
 .product-border /*produit, panier*/
@@ -63,5 +69,14 @@ body
     color: red;
 }
 
-/*confirmation*/
+.basket-title
+{
+    font-size: 20px;
+}
 
+#total-price
+{
+    font-size: 20px;
+}
+
+/*confirmation*/
