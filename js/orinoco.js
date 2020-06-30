@@ -11,7 +11,7 @@ get("http://localhost:3000/api/cameras", function(response){
     {   
         const div = document.createElement("div");
         div.innerHTML = response[i].name;
-        div.setAttribute("class", "col-md-5 product-border mt-5 mb-4");
+        div.setAttribute("class", "col-md-5 product-border mt-5 mb-4 col-sm-6 mr-4 ml-4");
 
         const img = document.createElement("img");
         img.setAttribute("src", response[i].imageUrl);
