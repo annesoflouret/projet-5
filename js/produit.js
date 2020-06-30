@@ -7,7 +7,7 @@ function getId(){
 const id = getId();
 console.log(id);
 function addToBasket(lenseSelected){
-    const basketContent = JSON.parse(localStorage.getItem("basketContent"));
+    let basketContent = JSON.parse(localStorage.getItem("basketContent"));
     if (basketContent == undefined) {
         basketContent = [];
     }

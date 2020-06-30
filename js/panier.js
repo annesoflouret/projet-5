@@ -36,37 +36,7 @@ get("http://localhost:3000/api/cameras/", function(response){
                     const divLenses = document.createElement("div");
                     divLenses.setAttribute("class", "col-md-3");
                     divLenses.innerHTML = productBasket.lenses;
-                    
-                    const divQuantity = document.createElement("div");
-                    divQuantity.setAttribute("class", "col-md-3");
-    
-                    //Modifier la quantité
-                    const quantityElement = document.createElement("select");
-                    quantityElement.setAttribute("class", "product-quantity")
-                    quantityElement.addEventListener("change", function() {
-                        let totalPrice = 0;
-                        let i = 0;
-                        const totalPriceBasket = document.getElementById("total-price");
-                        const quantities = document.getElementsByClassName("product-quantity")
-                        for (let productBasket of basketContent){
-                            for (let productInfo of response){
-                                if (productBasket.id == productInfo._id){
-                                    totalPrice += quantities[i].value * productInfo.price; 
-                                    i += 1;
-                                }
-                            }
-                        }
-                        totalPriceBasket.innerHTML = "Total: " + totalPrice + "€";
-                    });
-
-                    const quantity = 10;
-                    for (let i = 1; i <= quantity; i = i + 1){
-                        const option = document.createElement("option");
-                        option.setAttribute("value", i);
-                        option.innerHTML = i;
-                        quantityElement.appendChild(option);
-                    }
-                    
+                     
                     const divPrice = document.createElement("div");
                     divPrice.setAttribute("class", "col-md-3");
                     divPrice.innerHTML = productInfo.price + "€";
@@ -93,8 +63,6 @@ get("http://localhost:3000/api/cameras/", function(response){
                     divTitle.appendChild(image);
                     divTitle.appendChild(btn); 
                     productContainer.appendChild(divLenses);
-                    productContainer.appendChild(divQuantity);
-                    divQuantity.appendChild(quantityElement);
                     productContainer.appendChild(divPrice);
                     container.appendChild(productContainer);
                    
@@ -113,8 +81,7 @@ const btn = document.getElementById("btn");
 
 btn.addEventListener("click", function(event){
     event.preventDefault();
-    
-    console.log(name.value);
+    let orderValidity = true;
     const error = document.getElementById("error");
     error.innerHTML = "";
     let inputIds = ["name", "firstname", "email", "adresse", "city"];
@@ -125,24 +92,54 @@ btn.addEventListener("click", function(event){
             const errorMessage = document.createElement("p");
             errorMessage.setAttribute("class", "error-message-color");
             errorMessage.innerHTML = "Merci d'indiquer votre " + inputTexts[i] + ".";
+            orderValidity = false;
             error.appendChild(errorMessage);
         }
     }
 
-    const jsonBody = {
-        "contact": {
-            "name": document.getElementById("name").value,
-            "firstname": document.getElementById("firstname").value,
-            "mail": document.getElementById("email").value,
-            "adress": document.getElementById("adresse").value,
-            "city": document.getElementById("city"),
 
-        },
-        'produits': [128932, 37838734, 37833]
+    //envoyer la requête
+
+    let sendOrder = function () {
+            const name = document.getElementById("name").value;
+            const firstname = document.getElementById("firstname").value;
+            const mail = document.getElementById("email").value;
+            const adress = document.getElementById("adresse").value;
+            const city = document.getElementById("city").value;  
+    //information formulaire
+            class infoForm {
+                constructor(name, firstname, mail, adress, city) {
+                    this.lastName = name;
+                    this.firstName = firstname;
+                    this.email = mail;
+                    this.address = adress;
+                    this.city = city;
+                }
+            }
+    //information commande
+            class orderInfo {
+                constructor(formInformation, idOrder) {
+                    this.contact = formInformation;
+                    this.products = idOrder;
+                }
+            }
+            
+            const formInformation = new infoForm (name, firstname, mail, adress, city);
+            const basketContent = JSON.parse(localStorage.getItem("basketContent"));
+            console.log(basketContent);
+
+            let idOrder = [];
+
+            for (let i = 0; i < basketContent.length; i =  i + 1){
+                basketContent[i].id;
+                idOrder.push(basketContent[i].id);
+            }
+            console.log(idOrder);
+            const command = new orderInfo(formInformation, idOrder);
+            post(command);
+    };
+    if (orderValidity == true){
+        sendOrder();
     }
-    post(jsonBody)
     
-})
-
-
-
+});
