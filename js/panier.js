@@ -107,6 +107,7 @@ btn.addEventListener("click", function(event){
             const adress = document.getElementById("adresse").value;
             const city = document.getElementById("city").value;  
     //information formulaire
+    
             class infoForm {
                 constructor(name, firstname, mail, adress, city) {
                     this.lastName = name;
@@ -116,6 +117,7 @@ btn.addEventListener("click", function(event){
                     this.city = city;
                 }
             }
+
     //information commande
             class orderInfo {
                 constructor(formInformation, idOrder) {
