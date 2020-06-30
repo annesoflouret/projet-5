@@ -1,84 +1,80 @@
 console.log(window.location);
 function getId(){
-    let param = window.location.search;
-    let id = param.replace("?id=", "");
+    const param = window.location.search;
+    const id = param.replace("?id=", "");
     return id;
 }
-
-let id = getId();
+const id = getId();
 console.log(id);
+function addToBasket(lenseSelected){
+    const basketContent = JSON.parse(localStorage.getItem("basketContent"));
+    if (basketContent == undefined) {
+        basketContent = [];
+    }
+
+    let product = new Product(id, lenseSelected);
+
+    basketContent.push(product);
+    localStorage.setItem("basketContent", JSON.stringify(basketContent));
+}
+
 get("http://localhost:3000/api/cameras/" + id, function(response){
-console.log(response);
+    console.log(response);
 
-        //création du cadre de l'appareil photo séléctionné
-        let container = document.getElementById("productcontainer");
+    //création du cadre de l'appareil photo séléctionné
+    const container = document.getElementById("productcontainer");
 
-        let div = document.createElement("div");
-        div.setAttribute("class", "product-border col-md-6 offset-md-3 mt-5 mb-5 p-3");
+    const div = document.createElement("div");
+    div.setAttribute("class", "product-border col-md-6 offset-md-3 mt-5 mb-5 p-3");
 
-        let img = document.createElement("img");
-        img.setAttribute("src", response.imageUrl);
-        img.setAttribute("width", "100%");
+    const img = document.createElement("img");
+    img.setAttribute("src", response.imageUrl);
+    img.setAttribute("width", "100%");
 
-        let title = document.createElement("div");
-        title.innerHTML = response.name;
-        title.setAttribute("class", "producttitle text-center mb-4");
+    const title = document.createElement("div");
+    title.innerHTML = response.name;
+    title.setAttribute("class", "producttitle text-center mb-4");
 
-        let legend = document.createElement("div");
-        legend.innerHTML = response.description;
-        
-        let price = document.createElement("p");
-        price.innerHTML = response.price + "€";
-        
-        // Choix des lentilles
-        let lenses = document.createElement("select");
-        
+    const legend = document.createElement("div");
+    legend.innerHTML = response.description;
     
-        let optionDefault = document.createElement("option");
-        optionDefault.innerHTML = "Please choose an option";
-        lenses.appendChild(optionDefault);
+    const price = document.createElement("p");
+    price.innerHTML = response.price + "€";
+    
+    // Choix des lentilles
+    const lenses = document.createElement("select");
+    
+    const optionDefault = document.createElement("option");
+    optionDefault.innerHTML = "Please choose an option";
+    lenses.appendChild(optionDefault);
 
-        //alerte ajout panier
-        let btn = document.createElement("button"); 
-        btn.innerHTML = "Ajouter au panier";
+    //alerte ajout panier
+    const btn = document.createElement("button"); 
+    btn.innerHTML = "Ajouter au panier";
 
-
-        // Ajout d'élément au local storage
-        btn.addEventListener('click', function() { 
-        let lenses = document.getElementsByTagName("select");         
+    // Ajout d'élément au local storage
+    btn.addEventListener('click', function() { 
+        const lenses = document.getElementsByTagName("select");         
         let lenseSelected = lenses[0].value;
-        alert("ajouté au panier");
         console.log(lenseSelected);
         console.log(id);
 
+        addToBasket(lenseSelected);
+        alert("ajouté au panier");
+    });
 
-        let basketContent = JSON.parse(localStorage.getItem("basketContent"));
-        if (basketContent == undefined) {
-            basketContent = [];
-        }
-
-        let product = { lenses: lenseSelected, 
-                        id: id,
-        };
-
-        basketContent.push(product);
-        localStorage.setItem("basketContent", JSON.stringify(basketContent));
-});
-
-        for (let i = 0; i < response.lenses.length; i = i + 1){
-            let option = document.createElement("option");
-            option.setAttribute("value", response.lenses[i]);
-            option.innerHTML = response.lenses[i];
-            lenses.appendChild(option);
-        }
-         // arboresence
-        container.appendChild(div);
-        div.appendChild(title);
-        div.appendChild(img);
-        div.appendChild(legend);
-        div.appendChild(lenses);
-        div.appendChild(price);
-        div.appendChild(btn);
-        
-
+    for (let i = 0; i < response.lenses.length; i = i + 1){
+        const option = document.createElement("option");
+        option.setAttribute("value", response.lenses[i]);
+        option.innerHTML = response.lenses[i];
+        lenses.appendChild(option);
+    }
+    // arboresence
+    container.appendChild(div);
+    div.appendChild(title);
+    div.appendChild(img);
+    div.appendChild(legend);
+    div.appendChild(lenses);
+    div.appendChild(price);
+    div.appendChild(btn);
 });

@@ -8,3 +8,11 @@ function get(url, callback){
     }
     request.send();  
 }
+
+function post(jsonBody){
+    let request = new XMLHttpRequest();
+    request.open("POST", "hhttp://localhost:3000/api/cameras/order");
+    request.setRequestHeader("Content-Type", "application/json");
+    request.send(JSON.stringify(jsonBody));
+}
+
