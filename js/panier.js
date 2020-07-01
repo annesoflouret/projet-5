@@ -138,7 +138,11 @@ btn.addEventListener("click", function(event){
             }
             console.log(idOrder);
             const command = new orderInfo(formInformation, idOrder);
-            post(command);
+            post("http://localhost:3000/api/cameras/order", command, function(response){
+                localStorage.setItem("basketContent", JSON.stringify([])); 
+                localStorage.setItem("orderConfirmation", response.orderId);
+                window.location.href = "confirmation.html"; // on va à la page de confirmation
+            });
     };
     if (orderValidity == true){
         sendOrder();
