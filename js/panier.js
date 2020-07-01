@@ -1,4 +1,4 @@
-get("http://localhost:3000/api/cameras/", function(response){
+get("http://localhost:3000/api/cameras/").then( function(response){
     console.log(response);
     //ajouter un élément au panier
     const basketContent = JSON.parse(localStorage.getItem("basketContent"));//récuperation local storage

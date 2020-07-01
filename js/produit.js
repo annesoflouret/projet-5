@@ -18,7 +18,7 @@ function addToBasket(lenseSelected){
     localStorage.setItem("basketContent", JSON.stringify(basketContent));
 }
 
-get("http://localhost:3000/api/cameras/" + id, function(response){
+get("http://localhost:3000/api/cameras/" + id).then( function(response){
     console.log(response);
 
     //création du cadre de l'appareil photo séléctionné

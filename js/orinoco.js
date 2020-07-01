@@ -1,6 +1,6 @@
 console.log(window.location);
 
-get("http://localhost:3000/api/cameras", function(response){
+get("http://localhost:3000/api/cameras").then( function(response){
     const section = document.getElementsByClassName("row");
     console.log(response);
     const test = localStorage.getItem("test");
