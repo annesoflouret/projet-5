@@ -1,11 +1,6 @@
-console.log(window.location);
-
 get("http://localhost:3000/api/cameras").then( function(response){
     const section = document.getElementsByClassName("row");
-    console.log(response);
-    const test = localStorage.getItem("test");
-    console.log(test);
-
+    
     //création des cardes de présentation des appareils photos
     for (let i = 0; i < response.length; i = i + 1)
     {   
@@ -45,8 +40,9 @@ get("http://localhost:3000/api/cameras").then( function(response){
         section[1].appendChild(div);
     }
     
+}).catch(function(err){
+    console.log(err);
+    if(err === 0){ // requete ajax annulée
+        alert("serveur HS");
+    }
 });
-
-
-
-

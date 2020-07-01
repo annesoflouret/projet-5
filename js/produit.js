@@ -1,11 +1,9 @@
-console.log(window.location);
 function getId(){
     const param = window.location.search;
     const id = param.replace("?id=", "");
     return id;
 }
 const id = getId();
-console.log(id);
 function addToBasket(lenseSelected){
     let basketContent = JSON.parse(localStorage.getItem("basketContent"));
     if (basketContent == undefined) {
@@ -19,7 +17,6 @@ function addToBasket(lenseSelected){
 }
 
 get("http://localhost:3000/api/cameras/" + id).then( function(response){
-    console.log(response);
 
     //création du cadre de l'appareil photo séléctionné
     const container = document.getElementById("productcontainer");
@@ -56,8 +53,6 @@ get("http://localhost:3000/api/cameras/" + id).then( function(response){
     btn.addEventListener('click', function() { 
         const lenses = document.getElementsByTagName("select");         
         let lenseSelected = lenses[0].value;
-        console.log(lenseSelected);
-        console.log(id);
 
         addToBasket(lenseSelected);
         alert("ajouté au panier");
@@ -77,4 +72,9 @@ get("http://localhost:3000/api/cameras/" + id).then( function(response){
     div.appendChild(lenses);
     div.appendChild(price);
     div.appendChild(btn);
+}).catch(function(err){
+    console.log(err);
+    if(err === 0){ // requete ajax annulée
+        alert("serveur HS");
+    }
 });
