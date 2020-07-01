@@ -1,8 +1,10 @@
+//funtion message panier vide.
+// function ligne 19-46 + appendChild
+// addEventListener
+
 get("http://localhost:3000/api/cameras/").then( function(response){
-    console.log(response);
     //ajouter un élément au panier
     const basketContent = JSON.parse(localStorage.getItem("basketContent"));//récuperation local storage
-    console.log(basketContent)
     const container = document.getElementById("product-basket");
     if (basketContent.length == 0){ //Message panier vide
         const emptyBasket = document.createElement("div")
@@ -44,11 +46,9 @@ get("http://localhost:3000/api/cameras/").then( function(response){
 
                     // supprimer un élément du panier
                     btn.addEventListener('click', function(e) { 
-                        console.log(basketContent.length);
                         const id = e.target.getAttribute("data-id");
     
                         for (let x = 0; x != basketContent.length; x = x + 1) {
-                            console.log(basketContent[x].id)
                             if (basketContent[x].id == id){
                                 basketContent.splice(x, 1);
                                 break;
@@ -73,6 +73,11 @@ get("http://localhost:3000/api/cameras/").then( function(response){
         // calcul du total
         const totalPriceBasket = document.getElementById("total-price")
         totalPriceBasket.innerHTML = "Total: " + totalPrice + "€";
+    }
+}).catch(function(err){
+    console.log(err);
+    if(err === 0){ // requete ajax annulée
+        alert("serveur HS");
     }
 });
 
@@ -128,7 +133,6 @@ btn.addEventListener("click", function(event){
             
             const formInformation = new infoForm (name, firstname, mail, adress, city);
             const basketContent = JSON.parse(localStorage.getItem("basketContent"));
-            console.log(basketContent);
 
             let idOrder = [];
 
@@ -136,12 +140,16 @@ btn.addEventListener("click", function(event){
                 basketContent[i].id;
                 idOrder.push(basketContent[i].id);
             }
-            console.log(idOrder);
             const command = new orderInfo(formInformation, idOrder);
-            post("http://localhost:3000/api/cameras/order", command, function(response){
+            post("http://localhost:3000/api/cameras/order", command).then( function(response){
                 localStorage.setItem("basketContent", JSON.stringify([])); 
                 localStorage.setItem("orderConfirmation", response.orderId);
                 window.location.href = "confirmation.html"; // on va à la page de confirmation
+            }).catch(function(err){
+                console.log(err);
+                if(err === 0){ // requete ajax annulée
+                    alert("serveur HS");
+                }
             });
     };
     if (orderValidity == true){
