@@ -16,15 +16,23 @@ function get(url){
     return promise;
 }
 
-function post(url, jsonBody, callback){
-    let request = new XMLHttpRequest();
-    request.open("POST", url);
-    request.setRequestHeader("Content-Type", "application/json");
-    
-    request.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 201) {
-            callback(JSON.parse(this.responseText));
-        }
-    }
-    request.send(JSON.stringify(jsonBody));
+function post(url, jsonBody){
+    const promise = new Promise(function(resolve, reject){
+        let request = new XMLHttpRequest();
+        request.open("POST", url);
+        request.setRequestHeader("Content-Type", "application/json");
+        request.onreadystatechange = function () {
+            if (this.readyState === 4) {
+                if(this.status === 201){
+                    resolve(JSON.parse(this.responseText));
+                 }else{
+                    reject(request.status);
+                }
+            }
+        };
+        request.send(JSON.stringify(jsonBody));
+    });
+    return promise;
 }
+    
+
