@@ -69,7 +69,7 @@ function checkFormErrors(orderValidity){
         const input = document.getElementById(inputIds[i]);
         if (input.value === ""){
             const errorMessage = document.createElement("p");
-            errorMessage.setAttribute("class", "error-message-color");
+            errorMessage.setAttribute("class", "text-danger");
             errorMessage.innerHTML = "Merci d'indiquer votre " + inputTexts[i] + ".";
             orderValidity = false;
             error.appendChild(errorMessage);

@@ -2,48 +2,21 @@
 body 
 {
     background-color: #F6ECFD;
-    width: auto;
-    height: auto;
 }
 
 .header
 {
-    text-decoration: none;
-    color: black;
-    text-align: right;
-    display: flex;
-    justify-content: space-between;
     background-color: #D1C4E9;
 }
 
-.nav-link
-{
-    color: black;
-}
-
-#space-h
-{
-    margin: 1em;
-}
 
 #footer
 {
-    text-align: right;
-    display: flex;
-    justify-content: space-between;
-    background-color: #B39DDB;
-    padding: 1em;
-}
-
-.footer-link
-{
-    text-decoration: none;
-    color: black; 
+    background-color: #B39DDB;  
 }
 
 #camera
 {
-    margin: 2em;
     font-size: 30px;
 }
 
@@ -52,23 +25,14 @@ body
     font-size: 25px;
 }
 
-.product-border /*produit, panier*/
+/*produit, panier*/
+.product-border 
 {
-    border: 1px solid black;
     box-shadow: 10px 5px 5px grey;
     background-color:#D1C4E9;
 }
 
-
-/*produit*/
-
-
 /*panier*/
-.error-message-color
-{
-    color: red;
-}
-
 .basket-title
 {
     font-size: 20px;
@@ -80,3 +44,7 @@ body
 }
 
 /*confirmation*/
+.confirmation-title
+{
+    font-size: 25px;
+}
