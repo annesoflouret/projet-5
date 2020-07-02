@@ -3,8 +3,7 @@
 // addEventListener
 
 
-
-////////////////////////////////////////////////Construction du Html//////////////////////////////////////////////
+/////////////////////////////// Ajoute les produit du panier dans la page HTML //////////////////////////
 function addBasketProduct(container, productInfo, productBasket, basketContent, totalPrice){
     const productContainer = document.createElement("div");
     productContainer.setAttribute("class", "row justify-content-around mb-5");
@@ -35,7 +34,7 @@ function addBasketProduct(container, productInfo, productBasket, basketContent, 
     divPrice.innerHTML = productInfo.price + "€";
     totalPrice = totalPrice + productInfo.price;        
 
-    // supprimer un élément du panier
+    ///////////////////////////// Supprimer un élément du panier///////////////////////////////////////
     btn.addEventListener('click', function(e) { 
         const id = e.target.getAttribute("data-id");
 
@@ -46,7 +45,7 @@ function addBasketProduct(container, productInfo, productBasket, basketContent, 
             }
         }
         localStorage.setItem("basketContent", JSON.stringify(basketContent)); // Sauvegarde du panier mis à jour
-        window.location.href = "panier.html"; // on revient à la page d'acceuil */ 
+        window.location.href = "panier.html"; // on revient à la page d'acceuil 
     });
     
     productContainer.appendChild(divTitle);
@@ -60,7 +59,7 @@ function addBasketProduct(container, productInfo, productBasket, basketContent, 
     return totalPrice;
 }
 
-//////////////////////////////Message erreur du formulaire quand les champs ne sont pas remplis///////////////////////
+////////////////////////// Message erreur du formulaire quand les champs ne sont pas remplis ///////////////////
 function checkFormErrors(orderValidity){
     const error = document.getElementById("error");
     error.innerHTML = "";
@@ -79,7 +78,7 @@ function checkFormErrors(orderValidity){
     return orderValidity;
 }
 
-//////////////////////////////////////////////////envoyer la requête
+////////////////////////////////////////////////// Envoyer la requête /////////////////////////////////////////////////
 function sendOrder() {
     const name = document.getElementById("name").value;
     const firstname = document.getElementById("firstname").value;
@@ -87,7 +86,6 @@ function sendOrder() {
     const adress = document.getElementById("adresse").value;
     const city = document.getElementById("city").value;  
 
-    
     const formInformation = new infoForm (name, firstname, mail, adress, city);
     const basketContent = JSON.parse(localStorage.getItem("basketContent"));
 
@@ -109,17 +107,23 @@ function sendOrder() {
         }
     });
 }
+/////////////////////////////////// Message panier //////////////////////////////////////////////////////
+function emptyBasketMessage(container){
+    const emptyBasket = document.createElement("div")
+    emptyBasket.innerHTML = "Votre panier est vide";
+    container.appendChild(emptyBasket);
 
-////////////////////////////////////////////
+    return container;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 get("http://localhost:3000/api/cameras/").then( function(response){
     //ajouter un élément au panier
     const basketContent = JSON.parse(localStorage.getItem("basketContent"));//récuperation local storage
     const container = document.getElementById("product-basket");
     if (basketContent.length === 0){ //Message panier vide
-        const emptyBasket = document.createElement("div")
-        emptyBasket.innerHTML = "Votre panier est vide";
-        container.appendChild(emptyBasket);
+        emptyBasketMessage(container);
     } else {
         let totalPrice = 0;
         for (let productBasket of basketContent){
@@ -147,9 +151,8 @@ btn.addEventListener("click", function(event){
     event.preventDefault();
     let orderValidity = true;
     orderValidity = checkFormErrors(orderValidity);
-    
+
     if (orderValidity === true){
         sendOrder();
     }
-    
 });
