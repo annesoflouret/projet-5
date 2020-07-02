@@ -1,12 +1,14 @@
+////////////// Récuprérer l'id dans l'URL /////////////////////////////////////////////////
 function getId(){
     const param = window.location.search;
-    const id = param.replace("?id=", "");
+    const id = param.replace("?id=", ""); // Retire ?ID= des parametres de l'URL, Recupère uniquement l'identitfiant
     return id;
 }
+///////////////// Ajoute le produit dans le panier avec la lentille sélectionnée par l'utilisateur /////
 const id = getId();
 function addToBasket(lenseSelected){
     let basketContent = JSON.parse(localStorage.getItem("basketContent"));
-    if (basketContent == undefined) {
+    if (basketContent === undefined) {
         basketContent = [];
     }
 
@@ -16,8 +18,8 @@ function addToBasket(lenseSelected){
     localStorage.setItem("basketContent", JSON.stringify(basketContent));
 }
 
-get("http://localhost:3000/api/cameras/" + id).then( function(response){
-
+///////////////////////// Ajoute les informations produit dans la page HTLM ///////////////////
+function addProductInfo(response){
     //création du cadre de l'appareil photo séléctionné
     const container = document.getElementById("productcontainer");
 
@@ -72,6 +74,11 @@ get("http://localhost:3000/api/cameras/" + id).then( function(response){
     div.appendChild(lenses);
     div.appendChild(price);
     div.appendChild(btn);
+}
+
+get("http://localhost:3000/api/cameras/" + id).then( function(response){
+    addProductInfo(response);
+    
 }).catch(function(err){
     console.log(err);
     if(err === 0){ // requete ajax annulée
