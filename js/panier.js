@@ -2,26 +2,9 @@
 // function ligne 19-46 + appendChild
 // addEventListener
 
-//information formulaire
-class infoForm {
-    constructor(name, firstname, mail, adress, city) {
-        this.lastName = name;
-        this.firstName = firstname;
-        this.email = mail;
-        this.address = adress;
-        this.city = city;
-    }
-}
 
-//information commande
-class orderInfo {
-    constructor(formInformation, idOrder) {
-        this.contact = formInformation;
-        this.products = idOrder;
-    }
-}
 
-////////////////////////////////////////////////
+////////////////////////////////////////////////Construction du Html//////////////////////////////////////////////
 function addBasketProduct(container, productInfo, productBasket, basketContent, totalPrice){
     const productContainer = document.createElement("div");
     productContainer.setAttribute("class", "row justify-content-around mb-5");
@@ -77,7 +60,7 @@ function addBasketProduct(container, productInfo, productBasket, basketContent, 
     return totalPrice;
 }
 
-//////////////////////////////////////////////
+//////////////////////////////Message erreur du formulaire quand les champs ne sont pas remplis///////////////////////
 function checkFormErrors(orderValidity){
     const error = document.getElementById("error");
     error.innerHTML = "";
