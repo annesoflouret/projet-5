@@ -1,8 +1,3 @@
-//funtion message panier vide.
-// function ligne 19-46 + appendChild
-// addEventListener
-
-
 /////////////////////////////// Ajoute les produit du panier dans la page HTML //////////////////////////
 function addBasketProduct(container, productInfo, productBasket, basketContent, totalPrice){
     const productContainer = document.createElement("div");
@@ -17,7 +12,7 @@ function addBasketProduct(container, productInfo, productBasket, basketContent, 
     const image = document.createElement("img");
     image.innerHTML = productInfo.imageUrl;
     image.setAttribute("src", productInfo.imageUrl);
-    image.setAttribute("width", "20%");   
+    image.setAttribute("width", "30%");   
     
     //Supprime élément
     const btn = document.createElement("button"); 
@@ -34,7 +29,7 @@ function addBasketProduct(container, productInfo, productBasket, basketContent, 
     divPrice.innerHTML = productInfo.price + "€";
     totalPrice = totalPrice + productInfo.price;        
 
-    ///////////////////////////// Supprimer un élément du panier///////////////////////////////////////
+    ///////////////////////////// Supprimer un élément du panier ///////////////////////////////////////
     btn.addEventListener('click', function(e) { 
         const id = e.target.getAttribute("data-id");
 
@@ -59,6 +54,24 @@ function addBasketProduct(container, productInfo, productBasket, basketContent, 
     return totalPrice;
 }
 
+//////////////////////////Validation Nom, Prénom, Ville expression regulière formulaire////////////////////
+function isAlpha(value) {
+    return /[a-zA-Z]+/.test(value);
+}
+
+////////////////////////////////////// Validation mail expression regulière formulaire////////////////////
+function validateEmail(value){
+ if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)){
+    return true;
+  }
+  return false;
+}
+
+////////////////////////////////////// Validation adresse expression regulière formulaire////////////////////
+function isAdresse(value){
+    return /\w+/.test(value);
+}
+
 ////////////////////////// Message erreur du formulaire quand les champs ne sont pas remplis ///////////////////
 function checkFormErrors(orderValidity){
     const error = document.getElementById("error");
@@ -73,6 +86,35 @@ function checkFormErrors(orderValidity){
             errorMessage.innerHTML = "Merci d'indiquer votre " + inputTexts[i] + ".";
             orderValidity = false;
             error.appendChild(errorMessage);
+        }else{
+            if (inputIds[i] === "name" || inputIds[i] === "firstname" || inputIds[i] === "city"){
+                if (isAlpha(input.value) === false){
+                    const errorMessage = document.createElement("p");
+                    errorMessage.setAttribute("class", "text-warning");
+                    errorMessage.innerHTML = "Merci d'écrire votre " + inputTexts[i] + " en toutes lettres.";
+                    orderValidity = false;
+                    error.appendChild(errorMessage);
+                }
+                
+            }
+            if (inputIds[i] === "email"){
+                if (validateEmail(input.value) === false){
+                    const errorMessage = document.createElement("p");
+                    errorMessage.setAttribute("class", "text-warning");
+                    errorMessage.innerHTML = "Merci d'écrire un " + inputTexts[i] + " valide";
+                    orderValidity = false;
+                    error.appendChild(errorMessage);
+                }
+            }
+            if (inputIds[i] === "adresse"){
+                if (isAdresse(input.value) === false){
+                    const errorMessage = document.createElement("p");
+                    errorMessage.setAttribute("class", "text-warning");
+                    errorMessage.innerHTML = "Merci d'écrire une " + inputTexts[i] + " valide";
+                    orderValidity = false;
+                    error.appendChild(errorMessage);
+                }
+            }
         }
     }
     return orderValidity;
@@ -90,6 +132,7 @@ function sendOrder() {
     const basketContent = JSON.parse(localStorage.getItem("basketContent"));
 
     let idOrder = [];
+    let totalPrice = 0;
 
     for (let i = 0; i < basketContent.length; i =  i + 1){
         basketContent[i].id;
@@ -116,6 +159,7 @@ function emptyBasketMessage(container){
     return container;
 }
 
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 get("http://localhost:3000/api/cameras/").then( function(response){
@@ -130,6 +174,7 @@ get("http://localhost:3000/api/cameras/").then( function(response){
             for (let productInfo of response){
                 if (productBasket.id === productInfo._id){
                     totalPrice = addBasketProduct(container, productInfo, productBasket, basketContent, totalPrice);
+                    localStorage.setItem("totalPriceConfirmationPage", totalPrice);
                 }
             }
         }
@@ -156,3 +201,16 @@ btn.addEventListener("click", function(event){
         sendOrder();
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
