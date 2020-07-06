@@ -24,7 +24,7 @@ function addProductInfo(response){
     const container = document.getElementById("productcontainer");
 
     const div = document.createElement("div");
-    div.setAttribute("class", "product-border col-md-6 offset-md-3 mt-5 mb-5 p-3");
+    div.setAttribute("class", "product-border col-md-6 offset-md-3 mt-5 mb-5 p-3 border border-dark");
 
     const img = document.createElement("img");
     img.setAttribute("src", response.imageUrl);
