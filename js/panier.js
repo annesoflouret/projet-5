@@ -30,10 +30,10 @@ function addBasketProduct(container, productInfo, productBasket, basketContent, 
     totalPrice = totalPrice + productInfo.price;        
 
     ///////////////////////////// Supprimer un élément du panier ///////////////////////////////////////
-    btn.addEventListener('click', function(e) { 
+    btn.addEventListener('click', function(e){ 
         const id = e.target.getAttribute("data-id");
 
-        for (let x = 0; x != basketContent.length; x = x + 1) {
+        for (let x = 0; x != basketContent.length; x = x + 1){
             if (basketContent[x].id === id){
                 basketContent.splice(x, 1);
                 break;
@@ -55,7 +55,7 @@ function addBasketProduct(container, productInfo, productBasket, basketContent, 
 }
 
 //////////////////////////Validation Nom, Prénom, Ville expression regulière formulaire////////////////////
-function isAlpha(value) {
+function isAlpha(value){
     return /[a-zA-Z]+/.test(value);
 }
 
@@ -95,7 +95,6 @@ function checkFormErrors(orderValidity){
                     orderValidity = false;
                     error.appendChild(errorMessage);
                 }
-                
             }
             if (inputIds[i] === "email"){
                 if (validateEmail(input.value) === false){
@@ -120,8 +119,8 @@ function checkFormErrors(orderValidity){
     return orderValidity;
 }
 
-////////////////////////////////////////////////// Envoyer la requête /////////////////////////////////////////////////
-function sendOrder() {
+///////////////////////////////////////////// Envoyer la requête de commande/////////////////////////////////////////////////
+function sendOrder(){
     const name = document.getElementById("name").value;
     const firstname = document.getElementById("firstname").value;
     const mail = document.getElementById("email").value;
@@ -150,7 +149,7 @@ function sendOrder() {
         }
     });
 }
-/////////////////////////////////// Message panier //////////////////////////////////////////////////////
+/////////////////////////////////// Message panier vide //////////////////////////////////////////////////////
 function emptyBasketMessage(container){
     const emptyBasket = document.createElement("div")
     emptyBasket.innerHTML = "Votre panier est vide";
@@ -162,7 +161,7 @@ function emptyBasketMessage(container){
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-get("http://localhost:3000/api/cameras/").then( function(response){
+get("http://localhost:3000/api/cameras/").then(function(response){
     //ajouter un élément au panier
     const basketContent = JSON.parse(localStorage.getItem("basketContent"));//récuperation local storage
     const container = document.getElementById("product-basket");
@@ -201,16 +200,3 @@ btn.addEventListener("click", function(event){
         sendOrder();
     }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-

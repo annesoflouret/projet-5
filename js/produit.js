@@ -8,9 +8,10 @@ function getId(){
 const id = getId();
 function addToBasket(lenseSelected){
     let basketContent = JSON.parse(localStorage.getItem("basketContent"));
-    if (basketContent === undefined) {
+    console.log(basketContent);
+    if (basketContent === undefined){
         basketContent = [];
-    }
+    }console.log(basketContent);
 
     let product = new Product(id, lenseSelected);
 
@@ -52,7 +53,7 @@ function addProductInfo(response){
     btn.innerHTML = "Ajouter au panier";
 
     // Ajout d'élément au local storage
-    btn.addEventListener('click', function() { 
+    btn.addEventListener('click', function(){ 
         const lenses = document.getElementsByTagName("select");         
         let lenseSelected = lenses[0].value;
 
