@@ -45,7 +45,7 @@ function addProductInfo(response){
     const lenses = document.createElement("select");
     
     const optionDefault = document.createElement("option");
-    optionDefault.innerHTML = "Please choose an option";
+    optionDefault.innerHTML = "Merci de choisir une option";
     lenses.appendChild(optionDefault);
 
     //alerte ajout panier
