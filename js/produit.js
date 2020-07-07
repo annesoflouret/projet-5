@@ -8,11 +8,11 @@ function getId(){
 const id = getId();
 function addToBasket(lenseSelected){
     let basketContent = JSON.parse(localStorage.getItem("basketContent"));
-    console.log(basketContent);
-    if (basketContent === undefined){
+    if (basketContent === null){
         basketContent = [];
-    }console.log(basketContent);
+    }
 
+/////////////////////// Produit ajouter au local storage //////////////////////////////
     let product = new Product(id, lenseSelected);
 
     basketContent.push(product);
