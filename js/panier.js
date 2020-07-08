@@ -131,8 +131,7 @@ function sendOrder(){
     const basketContent = JSON.parse(localStorage.getItem("basketContent"));
 
     let idOrder = [];
-    let totalPrice = 0;
-
+    
     for (let i = 0; i < basketContent.length; i =  i + 1){
         basketContent[i].id;
         idOrder.push(basketContent[i].id);

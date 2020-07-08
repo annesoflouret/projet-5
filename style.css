@@ -2,6 +2,7 @@
 body 
 {
     background-color: #F6ECFD;
+    padding-bottom: 56px;
 }
 
 .header
@@ -12,7 +13,7 @@ body
 
 #footer
 {
-    background-color: #B39DDB;  
+    background-color: #B39DDB; 
 }
 
 #camera
